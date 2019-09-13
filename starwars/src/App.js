@@ -13,7 +13,6 @@ const CardCon = styled.div`
     justify-content: space-evenly;
     max-width: 100%;
     height: 100vh;
-    border: 2px solid red;
     margin: 1rem;
 
 `;
