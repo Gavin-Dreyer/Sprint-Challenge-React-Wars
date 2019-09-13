@@ -1,9 +1,26 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import styled from 'styled-components';
-import Name from './components/Name';
 import Attributes from './components/Attributes';
+import Species from './components/Species'
 import axios from 'axios';
+
+const CardCon = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: space-evenly;
+    justify-content: space-evenly;
+    max-width: 100%;
+    height: 100vh;
+    border: 2px solid red;
+    margin: 1rem;
+
+`;
+
+// const ButtonStyle = styled.button`
+//     font-size: 2rem;
+// `;
 
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
@@ -13,6 +30,11 @@ const App = () => {
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
   const [data, setData] = useState([])
+  const [species, setSpecies] = useState([])
+
+  // const ChangeSpecies = e => {
+  //   // setSpecies()
+  // }
 
   useEffect(() => {
     axios
@@ -24,19 +46,32 @@ const App = () => {
       .catch (error => {
         console.log(error)
       })
-  }, [])
+  }, []);
+
+    useEffect(() => {
+      axios
+        .get(`https://swapi.co/api/species`)
+        .then(response => {
+          console.log(response.data.results)
+          setSpecies(response.data.results[0])
+        })
+        .catch (error => {
+          console.log(error)
+        })
+    }, []);
+
+
   return (
     <div className="App">
-      <div>
+      <CardCon>
         {data.map((item, index) => {
-          return <Name name={item.name} key={index}/>
+          return <Attributes name={item.name} height={item.height} mass={item.mass} gender={item.gender} key={index}/>
         })}
-      </div>
-      <div>
-        {data.map((item, index) => {
-          return <Attributes height={item.height} mass={item.mass} gender={item.gender} key={index}/>
-        })}
-      </div>
+
+        <Species name={species.name} designation={species.designation} language={species.language} />
+        {/* <ButtonStyle onClick={() => ChangeSpecies()}>Button</ButtonStyle> */}
+        
+      </CardCon>
     </div>
   );
 }

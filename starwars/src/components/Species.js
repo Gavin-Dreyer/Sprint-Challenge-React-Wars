@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const AttrDiv = styled.div`
+const SpeciesDiv = styled.div`
     font-size: 1.25rem;
     background-color: lightgrey;
     opacity: .75;
@@ -9,25 +9,27 @@ const AttrDiv = styled.div`
     margin: 1rem;
 `;
 
-function Attributes (props) {
+// const ButtonStyle = styled.button`
+//     font-size: 2rem;
+// `;
+
+function Species (props) {
     return (
     <>    
-        <AttrDiv key={props.index}>
+        <SpeciesDiv >
             <p>
                 Name: {props.name}
             </p>
             <p>
-                Height: {props.height} 
+                Language: {props.language}
             </p>
             <p>
-                Mass: {props.mass}
+                Designation: {props.designation}
             </p>
-            <p>
-                Gender: {props.gender}
-            </p>
-        </AttrDiv>
+            
+        </SpeciesDiv>
     </>
     )
 }
 
-export default Attributes;
+export default Species;
