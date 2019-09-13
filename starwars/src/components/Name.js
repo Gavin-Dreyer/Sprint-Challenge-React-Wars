@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Name () {
+const NameDiv = styled.div`
+    font-size: 2rem;
+`;
+
+function Name (props) {
     return (
-        <div></div>
+        <NameDiv key={props.index}>{props.name}</NameDiv>
     )
 }
 
